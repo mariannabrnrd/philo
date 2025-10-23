@@ -1,6 +1,23 @@
 
 #include "philo.h"
 
+void 	free_data(t_data *data)
+{
+	int 	i;
+
+	i = 0;
+	if (data->forks)
+	{
+		while (i < data->num_philo)
+			pthread_mutex_destroy(&data->forks[i++]);
+		free(data->forks);
+	}
+	pthread_mutex_destroy(&data->print);
+	if (data->philo)
+		free(data->philo);
+}
+
+/* funzione che prende il tempo */
 long 	get_time(void)
 {
 	struct timeval 	time;
@@ -10,6 +27,7 @@ long 	get_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
+/* funzione per il malloc, se non va a buon fine, stampa errore */
 void 	*ft_malloc(size_t size)
 {
 	void 	*res;
@@ -17,7 +35,7 @@ void 	*ft_malloc(size_t size)
 	res = malloc(size);
 	if (!res)
 	{
-		printf("error malloc");
+		ft_err_malloc("error malloc");
 		return (NULL);
 	}
 	return (res);

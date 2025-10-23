@@ -1,5 +1,20 @@
-
 #include "philo.h"
+
+int 	check_struct(t_data *data)
+{
+	int 	i;
+	if (!data->forks)
+		return(1);
+	if (!data->philo)
+		return(1);
+	i = 0;
+	while (i < data->num_philo)
+	{
+		if (!data->philo[i++].data)
+			return(ft_error_msg("malloc failed for philosopher data pointer\n"));
+	}
+	return(0);
+}
 
 /* riporto quale argomento non va bene */
 char    *get_arg(int index)

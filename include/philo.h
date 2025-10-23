@@ -13,12 +13,21 @@
 /*                                  COLORS                                      */
 /* **************************************************************************** */
 
-#define RED     "\033[1;31m"
-#define GREEN   "\033[1;32m"
-#define YELLOW  "\033[1;33m"
-#define CYAN    "\033[1;36m"
-#define MAGENTA "\033[1;35m"
-#define RESET   "\033[0m"
+#define RED         "\033[1;31m"
+#define GREEN       "\033[1;32m"
+#define YELLOW      "\033[1;33m"
+#define CYAN        "\033[1;36m"
+#define MAGENTA     "\033[1;35m"
+#define BLUE        "\033[1;34m"
+#define WHITE       "\033[1;37m"
+#define RED_S       "\033[31m"
+#define GREEN_S     "\033[32m"
+#define YELLOW_S    "\033[33m"
+#define CYAN_S      "\033[36m"
+#define MAGENTA_S   "\033[35m"
+#define BLUE_S      "\033[34m"
+#define WHITE_S     "\033[37m"
+#define RESET       "\033[0m"
 
 /* **************************************************************************** */
 /*                                  STRUCT                                      */
@@ -56,6 +65,7 @@ typedef struct  s_data
 /*                 CHEK_INPUT                         */
 /* ************************************************** */
 
+int 	check_struct(t_data *data);
 char    *get_arg(int index);
 int     check_input(int ac, char **av);
 int		check_args(int ac, char **av);
@@ -72,6 +82,7 @@ void    init_philo(t_data *data);
 /*                  ERROR                            */
 /* ************************************************** */
 
+void    ft_err_malloc(char *msg);
 int     ft_msg_err(char *msg);
 int     ft_error_msg(char *msg);
 
@@ -79,7 +90,9 @@ int     ft_error_msg(char *msg);
 /*                  UTILS                             */
 /* ************************************************** */
 
-int	    ft_atol(char *str);
+long 	get_time(void);
+void 	*ft_malloc(size_t size);
+long	    ft_atol(char *str);
 int     ft_strlen(char *msg);
 int     ft_isdigit(char *str);
 
