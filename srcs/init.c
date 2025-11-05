@@ -18,6 +18,7 @@ void    init_philo(t_data *data)
         data->philo[i].fork_left = i;
         data->philo[i].fork_right = (i + 1) % data->num_philo;
         data->philo[i].data = data;
+        pthread_mutex_init(&data->philo[i].meal_check, NULL);
         i++; 
     }
 }
@@ -49,6 +50,7 @@ void    init_data(t_data *data, int ac, char **av)
     data->start_time = get_time();
     data->death_flag = 0;
     pthread_mutex_init(&data->print, NULL);
+    pthread_mutex_init(&data->death_check, NULL);
     init_forks(data);
     init_philo(data);
 }

@@ -1,8 +1,8 @@
 #include "philo.h"
 
-size_t  ft_usleep(long time_in_ms)
+long  ft_usleep(long time_in_ms)
 {
-	size_t	start_time;
+	long	start_time;
 
 	start_time = get_time();
 	while ((get_time() - start_time) < time_in_ms)

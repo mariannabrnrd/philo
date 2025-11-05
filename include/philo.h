@@ -44,6 +44,7 @@ typedef struct  s_philo
     int         fork_left;          //-------> forchetta di sinistra
     int         fork_right;         //-------> forchetta di destra
     pthread_t   thread;             //-------> thread del philos
+    pthread_mutex_t     meal_check; //-------> mutex per il controllo dei pasti
     t_data      *data;              //-------> puntatore alla struttura principale
 }               t_philo;
 
@@ -57,6 +58,7 @@ typedef struct  s_data
     long        start_time;         //-------> tempo con cui inizia l'esecuzione
     int         death_flag;         //-------> se qualcuno e morto
     pthread_mutex_t     print;      //-------> mutex per printare
+    pthread_mutex_t     death_check; //-------> mutex per la variabile di morte
     pthread_mutex_t		*forks;     //-------> mutex delle forchette
     t_philo             *philo;     //-------> struttura dei philos
 }               t_data;
@@ -75,11 +77,26 @@ int		check_args(int ac, char **av);
 /* ************************************************** */
 
 void    init_data(t_data *data, int ac, char **av);
+void    init_forks(t_data *data);
 void    init_philo(t_data *data);
 
+/* ************************************************** */
+/*                  PHILO                             */
+/* ************************************************** */
+int     one_philo(t_data *data);
+void    *ft_routine(void *philosopher);
+int     create_threads(t_data *data);
 
 /* ************************************************** */
-/*                  ERROR                            */
+/*                  ACTIONS                           */
+/* ************************************************** */
+void    ft_eat(t_philo *philo);
+void    ft_sleep(t_philo *philo);
+void    ft_think(t_philo *philo);
+void    ft_print_action(t_philo *philo, char *action);
+
+/* ************************************************** */
+/*                  ERROR                             */
 /* ************************************************** */
 
 void    ft_err_malloc(char *msg);
@@ -91,10 +108,16 @@ int     ft_error_msg(char *msg);
 /* ************************************************** */
 
 long 	get_time(void);
+long    ft_usleep(long time);
+void    free_data(t_data *data);
+
+/* ************************************************** */
+/*                 LIBFT_FUNCTIONS                    */
+/* ************************************************** */
 void 	*ft_malloc(size_t size);
-long	    ft_atol(char *str);
+int	    ft_isdigit(char *str);
+long	ft_atol(char *str);
 int     ft_strlen(char *msg);
-int     ft_isdigit(char *str);
 
 /* ************************************************** */
 /*                  PROVE                             */

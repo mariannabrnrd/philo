@@ -1,6 +1,6 @@
 #include "philo.h"
 
-/* ./philo  n_philo  time_to_die  time_to_eat  time_to_sleep  n_pasti */
+/* ./philo  n_philo  time_to_die  time_eat  time_to_sleep  n_pasti */
 int main(int ac, char **av)
 {
     t_data      data;
@@ -10,7 +10,7 @@ int main(int ac, char **av)
     init_data(&data, ac, av);
     if (check_struct(&data) == 1)
         return(1);
-    create_thread(&data);
+    create_threads(&data);
     /*print_data(&data);
     print_philos(&data);*/
     free_data(&data);

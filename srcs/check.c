@@ -24,7 +24,7 @@ char    *get_arg(int index)
     else if (index == 2)
         return("time_to_die");
     else if (index == 3)
-        return("time_to_eat");
+        return("time_eat");
     else if (index == 4)
         return("time_to_sleep");
     else if (index == 5)
