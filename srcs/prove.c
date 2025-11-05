@@ -17,7 +17,7 @@ void print_data(t_data *data)
         printf(GREEN "Number of meals        : " RESET "∞ (no limit)\n");
 
     printf(GREEN "Start time             : " RESET "%ld ms\n", data->start_time);
-    printf(GREEN "Death flag             : " RESET "%d\n", data->is_die);
+    printf(GREEN "Death flag             : " RESET "%d\n", data->death_flag);
 
     printf(CYAN "══════════════════════════════════════════════════════\n\n" RESET);
 }

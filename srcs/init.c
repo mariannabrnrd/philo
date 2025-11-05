@@ -47,7 +47,7 @@ void    init_data(t_data *data, int ac, char **av)
     else
         data->num_meals = -1;
     data->start_time = get_time();
-    data->is_die = 0;
+    data->death_flag = 0;
     pthread_mutex_init(&data->print, NULL);
     init_forks(data);
     init_philo(data);

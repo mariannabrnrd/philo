@@ -55,7 +55,7 @@ typedef struct  s_data
     long        time_sleep;         //-------> time to sleep
     long        num_meals;          //-------> numero dei pasti
     long        start_time;         //-------> tempo con cui inizia l'esecuzione
-    int         is_die;             //-------> se qualcuno e morto
+    int         death_flag;         //-------> se qualcuno e morto
     pthread_mutex_t     print;      //-------> mutex per printare
     pthread_mutex_t		*forks;     //-------> mutex delle forchette
     t_philo             *philo;     //-------> struttura dei philos
