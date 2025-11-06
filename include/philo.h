@@ -59,7 +59,7 @@ typedef struct  s_data
     int         death_flag;         //-------> se qualcuno e morto
     pthread_mutex_t     print;      //-------> mutex per printare
     pthread_mutex_t     death_check; //-------> mutex per la variabile di morte
-    pthread_mutex_t		*forks;     //-------> mutex delle forchette
+    pthread_mutex_t     *forks;     //-------> mutex delle forchette
     t_philo             *philo;     //-------> struttura dei philos
 }               t_data;
 

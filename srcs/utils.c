@@ -1,6 +1,8 @@
 #include "philo.h"
 
-long  ft_usleep(long time_in_ms)
+// capire quale ft_uspleep usare
+
+/*long  ft_usleep(long time_in_ms)
 {
 	long	start_time;
 
@@ -13,6 +15,25 @@ long  ft_usleep(long time_in_ms)
 			usleep(100); // per tempi piccoli, serve più precisione
 	}
 	return (0);
+}*/
+
+long    ft_usleep(long time_in_ms)
+{
+    long    start_time;
+    long    remaining;
+
+    start_time = get_time();
+    while ((get_time() - start_time) < time_in_ms)
+    {
+        remaining = time_in_ms - (get_time() - start_time);
+        if (remaining > 1000)  // Se manca più di 1 secondo
+            usleep(remaining * 1000 / 2);  // Dormi metà del tempo rimanente
+        else if (remaining > 10)
+            usleep(remaining * 100);  // Per tempi medi
+        else
+            usleep(100);  // Per precisione finale
+    }
+    return (0);
 }
 
 void 	free_data(t_data *data)
@@ -27,6 +48,13 @@ void 	free_data(t_data *data)
 		free(data->forks);
 	}
 	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->death_check);
+	i = 0;
+	while (i < data->num_philo)
+	{
+		pthread_mutex_destroy(&data->philo[i].meal_check);
+		i++;
+	}
 	if (data->philo)
 		free(data->philo);
 }

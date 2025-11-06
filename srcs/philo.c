@@ -38,26 +38,25 @@ void    *ft_routine(void *philosopher)
 
 int     create_threads(t_data *data)
 {
+    pthread_t  monitor;
     int     i;
 
     i = 0;
+    if (pthread_create(&monitor, NULL, ft_monitoring, data) != 0)
+        return(ft_error_msg("monitor thread don't create\n"));
     while (i < data->num_philo)
     {
         if (pthread_create(&data->philo[i].thread, NULL, ft_routine, &data->philo[i]) != 0)
-        {
-            ft_error_msg("thread don't create\n");
-            return(0);
-        }
+            return (ft_error_msg("thread don't create\n"));
         i++;
     }
+    if (pthread_join(monitor, NULL) != 0)
+        return(ft_error_msg("monitor thread don't join\n"));
     i = 0;
     while (i < data->num_philo)
     {
         if (pthread_join(data->philo[i].thread, NULL) != 0)
-        {
-            ft_error_msg("in joining thread");
-            return(0);
-        }
+            return(ft_error_msg("thread don't join\n"));
         i++;
     }
     return(0);

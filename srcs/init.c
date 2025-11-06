@@ -21,6 +21,7 @@ void    init_philo(t_data *data)
         pthread_mutex_init(&data->philo[i].meal_check, NULL);
         i++; 
     }
+    data->start_time = get_time();
 }
 
 /* creo l'array di mutex per le forchette */
@@ -47,7 +48,6 @@ void    init_data(t_data *data, int ac, char **av)
         data->num_meals = ft_atol(av[5]);
     else
         data->num_meals = -1;
-    data->start_time = get_time();
     data->death_flag = 0;
     pthread_mutex_init(&data->print, NULL);
     pthread_mutex_init(&data->death_check, NULL);
