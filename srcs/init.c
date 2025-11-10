@@ -13,7 +13,7 @@ void    init_philo(t_data *data)
     {
         data->philo[i].id = i + 1;
         data->philo[i].is_eating = 0;
-        data->philo[i].last_meal = data->start_time;
+        data->philo[i].last_meal = 0;
         data->philo[i].meals_counter = 0;
         data->philo[i].fork_left = i;
         data->philo[i].fork_right = (i + 1) % data->num_philo;
@@ -21,7 +21,7 @@ void    init_philo(t_data *data)
         pthread_mutex_init(&data->philo[i].meal_check, NULL);
         i++; 
     }
-    data->start_time = get_time();
+    //data->start_time = get_time();
 }
 
 /* creo l'array di mutex per le forchette */
@@ -49,6 +49,7 @@ void    init_data(t_data *data, int ac, char **av)
     else
         data->num_meals = -1;
     data->death_flag = 0;
+    data->start_time = get_time();
     pthread_mutex_init(&data->print, NULL);
     pthread_mutex_init(&data->death_check, NULL);
     init_forks(data);

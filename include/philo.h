@@ -39,7 +39,7 @@ typedef struct  s_philo
 {
     int         id;                 //-------> numero del philo
     int         is_eating;          //-------> variabile che serve per vedere se ha mangiato
-    int         last_meal;          //-------> ultimo pasto
+    long         last_meal;          //-------> ultimo pasto
     int         meals_counter;      //-------> numero dei pasti
     int         fork_left;          //-------> forchetta di sinistra
     int         fork_right;         //-------> forchetta di destra
@@ -94,6 +94,13 @@ void    ft_eat(t_philo *philo);
 void    ft_sleep(t_philo *philo);
 void    ft_think(t_philo *philo);
 void    ft_print_action(t_philo *philo, char *action);
+
+/* ************************************************** */
+/*                  MONITORING                        */
+/* ************************************************** */
+void    *ft_monitoring(void *arg);
+int     philo_died(t_data *data);
+int     check_meals(t_data *data);
 
 /* ************************************************** */
 /*                  ERROR                             */

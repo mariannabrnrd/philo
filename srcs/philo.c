@@ -21,37 +21,47 @@ int     one_philo(t_data *data)
 void    *ft_routine(void *philosopher)
 {
     t_philo *philo;
+    //pthread_t monitor;
 
     philo = (t_philo *)philosopher;
+    //if (pthread_create(&monitor, NULL, ft_monitoring, (void *)philo) != 0)
+    //    return (NULL);
     if (philo->id % 2 == 0)
         usleep(100);
-    while (philo->data->death_flag == 0)
+    while (1)
     {
         ft_eat(philo);
+        pthread_mutex_lock(&philo->data->death_check);
         if (philo->data->death_flag == 1)
+        {
+            pthread_mutex_unlock(&philo->data->death_check);
             break ;
+        }
+        pthread_mutex_unlock(&philo->data->death_check);
         ft_sleep(philo);
         ft_think(philo);
     }
+    //pthread_join(monitor, NULL);
     return (NULL);
 }
 
 int     create_threads(t_data *data)
 {
-    pthread_t  monitor;
+    //pthread_t  monitor;
     int     i;
 
     i = 0;
-    if (pthread_create(&monitor, NULL, ft_monitoring, data) != 0)
-        return(ft_error_msg("monitor thread don't create\n"));
     while (i < data->num_philo)
     {
         if (pthread_create(&data->philo[i].thread, NULL, ft_routine, &data->philo[i]) != 0)
-            return (ft_error_msg("thread don't create\n"));
+        return (ft_error_msg("thread don't create\n"));
         i++;
     }
+    //usleep(100);
+    /*if (pthread_create(&monitor, NULL, ft_monitoring, data) != 0)
+        return(ft_error_msg("monitor thread don't create\n"));
     if (pthread_join(monitor, NULL) != 0)
-        return(ft_error_msg("monitor thread don't join\n"));
+        return(ft_error_msg("monitor thread don't join\n"));*/
     i = 0;
     while (i < data->num_philo)
     {

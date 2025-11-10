@@ -40,7 +40,7 @@ void print_philos(t_data *data)
         printf(YELLOW "Philosopher %d\n" RESET, p->id);
         printf("  %-22s %d\n", "Is eating:", p->is_eating);
         printf("  %-22s %d\n", "Meals counter:", p->meals_counter);
-        printf("  %-22s %d\n", "Last meal time:", p->last_meal);
+        printf("  %-22s %ld\n", "Last meal time:", p->last_meal);
         printf("  %-22s %d\n", "Left fork index:", p->fork_left);
         printf("  %-22s %d\n", "Right fork index:", p->fork_right);
         printf("  %-22s %p\n", "Pointer to data:", (void *)p->data);
