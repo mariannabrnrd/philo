@@ -13,7 +13,7 @@ void    init_philo(t_data *data)
     {
         data->philo[i].id = i + 1;
         data->philo[i].is_eating = 0;
-        data->philo[i].last_meal = 0;
+        data->philo[i].last_meal = get_time();
         data->philo[i].meals_counter = 0;
         data->philo[i].fork_left = i;
         data->philo[i].fork_right = (i + 1) % data->num_philo;

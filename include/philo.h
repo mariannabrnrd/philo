@@ -103,6 +103,14 @@ int     philo_died(t_data *data);
 int     check_meals(t_data *data);
 
 /* ************************************************** */
+/*                  MONITORING 2                      */
+/* ************************************************** */
+int     create_monitor(t_data *data);
+void    *monitor_routine(void *arg);
+int     check_meals_completed(t_data *data);
+int    check_death(t_philo *philo);
+
+/* ************************************************** */
 /*                  ERROR                             */
 /* ************************************************** */
 

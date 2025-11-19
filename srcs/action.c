@@ -32,15 +32,36 @@ void    ft_eat(t_philo *philo)
     t_data *data;
 
     data = philo->data;
-    pthread_mutex_lock(&data->forks[philo->fork_left]);
+    /* da sistemare (?) */
+    /*pthread_mutex_lock(&data->forks[philo->fork_left]);
     ft_print_action(philo, "has taken a fork");
     if (one_philo(data) == 0)
         return;
     pthread_mutex_lock(&data->forks[philo->fork_right]);
-    ft_print_action(philo, "has taken a fork");
+    ft_print_action(philo, "has taken a fork");*/
+
+    if (philo->id % 2 == 0)
+    {
+        pthread_mutex_lock(&data->forks[philo->fork_right]);
+        ft_print_action(philo, "has taken a fork");
+        if (one_philo(data) == 0)
+            return;
+        pthread_mutex_lock(&data->forks[philo->fork_left]);
+        ft_print_action(philo, "has taken a fork");
+    }
+    else
+    {
+        pthread_mutex_lock(&data->forks[philo->fork_left]);
+        ft_print_action(philo, "has taken a fork");
+        if (one_philo(data) == 0)
+            return;
+        pthread_mutex_lock(&data->forks[philo->fork_right]);
+        ft_print_action(philo, "has taken a fork");
+    }
+
     pthread_mutex_lock(&philo->meal_check);
-    philo->is_eating = 1;
     philo->last_meal = get_time();
+    philo->is_eating = 1;
     pthread_mutex_unlock(&philo->meal_check);
     ft_print_action(philo, "is eating");
     ft_usleep(data->time_eat);
